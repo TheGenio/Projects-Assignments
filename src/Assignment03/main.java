@@ -6,22 +6,6 @@ import java.util.Arrays;
 public class main {
 
     public static void main(String[] args){
-        /*
-        Card[] cards = new Card[10];
-
-        for (int i=0; i< cards.length; i++){
-
-            //decide which card to make
-            int random = (int) (Math.random()*(1) +1 );
-            long cardnumber = (long) (Math.random() * 10);
-            if (random == 1){
-                int monthlyFeed = (int) (Math.random()*(300-100) +100);
-
-                cards[i] = new GoldCard()
-
-            }
-        }
-*/
 
         int numberOFCards = 10; // It can be of your own choice.
         Card[] cards = new Card[numberOFCards];
@@ -33,7 +17,7 @@ public class main {
             int cardnumber = (int) (Math.random() * 1000000000);
             if ( choice % 2 ==0 )
 
-                // Generate random fees  e.g. 15%  // (Math.random()*0.3);
+                // Generate random fees
                 cards[i] =new SilverCard(cardnumber, 0.15);
             else {
                 int monthlyFee = (int) (Math.random() * (300 - 100) + 100);
@@ -49,10 +33,18 @@ public class main {
 
         Arrays.sort(cards);
 
-        for (int i = 0 ; i < cards.length ; i++){
-            System.out.println(cards[i].toString());
+        for (Card value : cards) { //printing sorted arrays
+            System.out.println(value.toString());
         }
 
+        //finding the total amount of gold card members
+        double sumOfGoldCardAmount = 0;
+        for(Card card : cards){
+            if (card instanceof GoldCard){
+            sumOfGoldCardAmount += card.getAmount();
+            }
+        }
+        System.out.println("The total amount of all GoldenCard objects in the array is " + sumOfGoldCardAmount);
 
 
     }
@@ -90,7 +82,7 @@ class Card implements Comparable<Card>{
     }
 
     //methods
-    public double getAmount(ArrayList<Double> transactions){
+    public double getAmount(){
         double amount = 0.0;
         for(int i = 0; i < transactions.size(); i++){
             amount = transactions.get(i);
@@ -99,7 +91,7 @@ class Card implements Comparable<Card>{
     }
 
     public String toString(){
-        return "Card number:" + getCardNumber() + ", amount:" + getAmount( getTransactionList() );
+        return "Card number:" + getCardNumber() + ", amount:" + getAmount();
     }
 
     public boolean equals(Object o){
@@ -128,7 +120,7 @@ class SilverCard extends Card {
     }
 
     public String toString(){
-        return "SilverCard fees are " + transactionFee + ", Card number is " + getCardNumber() + ", Total amount: " + getAmount(getTransactionList());
+        return "SilverCard fees are " + transactionFee + ", Card number is " + getCardNumber() + ", Total amount: " + getAmount();
     }
 
 
@@ -145,7 +137,7 @@ class GoldCard extends Card{
     }
 
     public String toString(){
-        return "GoldCard fees are " + monthlyFee + ", Card number is " + getCardNumber() + ", Total amount: " + getAmount(getTransactionList()) +monthlyFee;
+        return "GoldCard fees are " + monthlyFee + ", Card number is " + getCardNumber() + ", Total amount: " + getAmount() +monthlyFee;
     }
 }
 
