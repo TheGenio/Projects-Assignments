@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class main {
-
     public static void main(String[] args){
 
         int numberOFCards = 10; // It can be of your own choice.
@@ -119,10 +118,6 @@ class SilverCard extends Card {
         getTransactionList().add( (amount * transactionFee + amount) );
     }
 
-    public String toString(){
-        return "SilverCard fees are " + transactionFee + ", Card number is " + getCardNumber() + ", Total amount: " + getAmount();
-    }
-
 
 }
 
@@ -136,8 +131,9 @@ class GoldCard extends Card{
         this.monthlyFee = monthlyFee;
     }
 
-    public String toString(){
-        return "GoldCard fees are " + monthlyFee + ", Card number is " + getCardNumber() + ", Total amount: " + getAmount() +monthlyFee;
+    public double getAmount(){
+        return super.getAmount() + monthlyFee;
     }
 }
+
 
